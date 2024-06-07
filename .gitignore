@@ -1,0 +1,13 @@
+/configs
+/shm
+/storage
+
+/node_modules
+/coverage
+
+.cache
+/local
+*.swp
+*.backup
+/.vscode
+/new

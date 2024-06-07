@@ -1,0 +1,92 @@
+{
+	"description": "Optional development tools, requires node 12.17+",
+	"scripts": {
+		"test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=default --reporters=jest-junit",
+		"cover": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+		"format": "npx prettier -w './{,!(.cache|coverage)/**/!(vendor)/}*.{js,mjs,css}'",
+		"lint-js": "npx eslint './{,!(.cache|coverage)/**/!(vendor)/}*.{js,mjs}' --cache=true --cache-location=./node_modules/.cache/eslint",
+		"lint-js-fix": "npx eslint './{,!(.cache|coverage)/**/!(vendor)/}*.{js,mjs}' --fix --cache=true --cache-location=./node_modules/.cache/eslint",
+		"lint-css": "npx stylelint './{,!(.cache|coverage)/**/!(vendor)/}*.css' --cache=true --cache-location=./node_modules/.cache/stylelint",
+		"lint-css-fix": "npx stylelint './{,!(.cache|coverage)/**/!(vendor)/}*.css' --fix --cache=true --cache-location=./node_modules/.cache/stylelint"
+	},
+	"devDependencies": {
+		"browserslist": "^4.21.10",
+		"eslint": "^8.48.0",
+		"eslint-plugin-compat": "^4.2.0",
+		"eslint-plugin-jest": "^27.2.3",
+		"eslint-plugin-promise": "^6.1.1",
+		"eslint-plugin-unicorn": "^48.0.1",
+		"jest": "^29.6.4",
+		"jest-environment-jsdom": "^29.6.4",
+		"jest-junit": "^16.0.0",
+		"prettier": "^3.0.3",
+		"prettier-plugin-go-template": "^0.0.15",
+		"stylelint": "^15.10.3",
+		"stylelint-config-standard": "^34.0.0",
+		"stylelint-no-unsupported-browser-features": "^7.0.0",
+		"stylelint-order": "^6.0.3"
+	},
+	"jest": {
+		"testEnvironment": "jsdom",
+		"transform": {},
+		"testMatch": ["**/*_test.mjs"],
+		"moduleFileExtensions": ["js", "mjs"],
+		"cacheDirectory": "./node_modules/.cache/jest",
+		"coverageDirectory": "coverage",
+		"coverageReporters": ["json", "cobertura"]
+	},
+	"jest-junit": {
+		"outputDirectory": "coverage/report",
+		"outputName": "js.xml"
+	},
+	"prettier": {
+		"printWidth": 90,
+		"tabWidth": 4,
+		"useTabs": true,
+		"plugins": ["prettier-plugin-go-template"]
+	},
+	"eslintConfig": {
+		"env": {
+			"browser": true,
+			"es2015": true,
+			"node": true
+		},
+		"extends": [
+			"eslint:recommended",
+			"plugin:promise/recommended",
+			"plugin:compat/recommended",
+			"plugin:unicorn/recommended",
+			"plugin:jest/recommended",
+			"plugin:jest/style"
+		],
+		"parserOptions": {
+			"ecmaVersion": 8,
+			"sourceType": "module"
+		},
+		"plugins": ["unicorn", "jest"],
+		"rules": {
+			"unicorn/consistent-function-scoping": "off",
+			"unicorn/prevent-abbreviations": "off",
+			"unicorn/filename-case": ["off"],
+			"unicorn/prefer-add-event-listener": "off",
+			"unicorn/numeric-separators-style": "off",
+			"unicorn/prefer-logical-operator-over-ternary": "off"
+		}
+	},
+	"stylelint": {
+		"extends": ["stylelint-config-standard"],
+		"plugins": ["stylelint-order", "stylelint-no-unsupported-browser-features"],
+		"rules": {
+			"value-keyword-case": null,
+			"no-descending-specificity": null,
+			"property-no-vendor-prefix": null,
+			"plugin/no-unsupported-browser-features": [
+				true,
+				{
+					"ignore": ["multicolumn", "css-appearance", "css-text-indent"]
+				}
+			]
+		}
+	},
+	"browserslist": ["Chrome 104", "Edge 104", "Firefox 81", "Opera 91", "Safari 16.4"]
+}
